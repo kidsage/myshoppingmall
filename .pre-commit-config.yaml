@@ -1,0 +1,56 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-added-large-files
+
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+        args:
+          - --config=pyproject.toml
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args:
+          - --settings=pyproject.toml
+          - --filter-files
+
+  - repo: local
+    hooks:
+      - id: check-django-migrations
+        name: check for missing django migrations
+        entry: python ./manage.py makemigrations
+        language: system
+        types: [python]
+        pass_filenames: false
+        args: [--check, --no-input, --settings=settings.ci]
+      - id: migrate-django-database
+        name: Migrate django database
+        entry: python ./manage.py migrate
+        language: system
+        types: [python]
+        args: [--settings=settings.ci]
+        stages: [post-merge]
+
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.4.0
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+        files: pyproject.toml$
+
+default_language_version:
+  python: python3.10
