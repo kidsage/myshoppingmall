@@ -33,14 +33,12 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth']
 
     def __str__(self):
         return self.email
@@ -55,3 +53,22 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
+
+class Profile(models.Model):
+
+    GENDER = (
+        ("M", "Male"),
+        ("F", "Female"),
+        ("T", "TransSexual")
+    )
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nickname = models.CharField(max_length=20)
+    bio = models.TextField()
+    date_of_birth = models.DateField()
+    gender = models.CharField()
+
+    REQUIRED_FIELDS = ['date_of_birth']
+
+    def __str__(self):
+        return self.nickname
