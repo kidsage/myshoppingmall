@@ -6,5 +6,5 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ] + MIDDLEWARE
 
-pg = Postgres(host="localhost", port="5555", name="mocktask", user="pg", password="pg")
+pg = Postgres(host="localhost", port="5432", name="myshop", user="postgres", password="postgres")
 DATABASES = {"default": pg.database}
