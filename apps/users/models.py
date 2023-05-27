@@ -3,7 +3,6 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -78,16 +77,16 @@ class UserProfile(models.Model):
     username = models.CharField(max_length=10)
     nickname = models.CharField(max_length=20)
     email = models.EmailField()
-    phonenumber = PhoneNumberField()
+    phonenumber = PhoneNumberField(null=False, blank=False, unique=True)
 
     # Optional
     date_of_birth = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=2, choices=GENDER, blank=True, null=True)
-    tall = models.SmallIntegerField(blank=True, null=True)
+    height = models.SmallIntegerField(blank=True, null=True)
     weight = models.SmallIntegerField(blank=True, null=True)
     address = models.CharField(max_length=100)
     
-    REQUIRED_FIELDS = ['nickname', 'date_of_birth', 'gender']
+    REQUIRED_FIELDS = ['username', 'nickname', 'email', 'phonenumber']
 
     def __str__(self):
         return self.nickname
@@ -97,3 +96,7 @@ class UserProfile(models.Model):
 
     def get_short_name(self):
         return self.nickname
+    
+
+# class Membership(models.Model):
+#     User = models.OneToOneField(User, on_delete=models.CASCADE)
