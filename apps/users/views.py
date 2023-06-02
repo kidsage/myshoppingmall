@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.viewsets import ModelViewSet
 
-
 from .error import EmailAlreadyExistsError
 from .models import User, UserProfile
 from .serializers import UserSerializer, UserProfileSerializer, LoginSerializer
