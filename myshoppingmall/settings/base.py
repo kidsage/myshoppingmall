@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.product',
     # Oterh apps
+    'rest_framework',
     'phonenumber_field',
 ]
 
