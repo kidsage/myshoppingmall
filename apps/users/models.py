@@ -84,7 +84,7 @@ class UserProfile(models.Model):
     gender = models.CharField(max_length=2, choices=GENDER, blank=True, null=True)
     height = models.SmallIntegerField(blank=True, null=True)
     weight = models.SmallIntegerField(blank=True, null=True)
-    address = models.CharField(max_length=100)
+    address = models.ForeignKey('Address', on_delete=models.SET_NULL, blank=True, null=True)
     
     REQUIRED_FIELDS = ['username', 'nickname', 'email', 'phonenumber']
 
@@ -98,5 +98,11 @@ class UserProfile(models.Model):
         return self.nickname
     
 
-# class Membership(models.Model):
-#     User = models.OneToOneField(User, on_delete=models.CASCADE)
+class Address(models.Model):
+    customer = models.OneToOneField(User, on_delete=models.CASCADE, default='')
+    home_address = models.CharField(max_length=50)
+    city = models.CharField(max_length=20)
+    state = models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.home_address
