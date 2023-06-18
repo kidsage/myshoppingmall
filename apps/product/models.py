@@ -5,7 +5,7 @@ from apps.users.models import User
 
 class Category(BaseModel):
     name = models.CharField()
-    featured_product = models.OneToOneField('Product', on_delete=models.CASCADE, blank=True, null=True)
+    featured_product = models.OneToOneField('Product', on_delete=models.CASCADE, blank=True, null=True, related_name='featured_product')
     slug = models.SlugField(default=None)
     icon = models.CharField(max_length=30, default=None, blank=True, null=True)
 
@@ -16,7 +16,7 @@ class Product(BaseModel):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.BooleanField(default=False)
     image = models.ImageField(upload_to='product/img', blank=True, null=True, default=False)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='product')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='products')
     slug = models.SlugField(default=None)
 
     def __str__(self) -> str:
