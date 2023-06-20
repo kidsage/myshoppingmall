@@ -10,4 +10,4 @@ def viewset_path(
 ) -> tuple[ModuleType, Optional[bool], Optional[bool]]:
     router = DefaultRouter()
     router.register(prefix, viewset, basename=basename or prefix)
-    return path(f'{prefix}', include(router.urls))
+    return path("", include(router.urls))
