@@ -76,7 +76,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=10)
     nickname = models.CharField(max_length=20)
-    email = models.EmailField()
     phonenumber = PhoneNumberField(null=False, blank=False, unique=True)
 
     # Optional
