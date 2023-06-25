@@ -10,11 +10,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    profile = UserProfileSerializer(source='userprofile', many=False)
+    profile = UserProfileSerializer(source='userprofile', many=False, required=False)
 
     class Meta:
         model = User
-        fields = ('email', 'date_joined', 'is_active', 'profile')
+        fields = ('email', 'password', 'profile')
 
     # Custom .update() method for serializer to handle UserProfile data update
     def update(self, instance, validated_data):
