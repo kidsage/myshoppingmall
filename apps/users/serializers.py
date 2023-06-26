@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'password', 'profile')
-
+    
     # Custom .update() method for serializer to handle UserProfile data update
     def update(self, instance, validated_data):
         userprofile_serializer = self.fields['profile']

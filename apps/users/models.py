@@ -6,6 +6,8 @@ from django.utils import timezone
 
 from phonenumber_field.modelfields import PhoneNumberField
 
+from core.models import BaseModel
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -64,7 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.is_admin
 
 
-class UserProfile(models.Model):
+class UserProfile(BaseModel):
 
     GENDER = (
         ("M", "Male"),
@@ -97,7 +99,7 @@ class UserProfile(models.Model):
         return self.nickname
     
 
-class Address(models.Model):
+class Address(BaseModel):
     customer = models.OneToOneField(User, on_delete=models.CASCADE, default='')
     home_address = models.CharField(max_length=50)
     city = models.CharField(max_length=20)
