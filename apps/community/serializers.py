@@ -6,10 +6,10 @@ from .models import Post, Comment
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['writer', 'title', 'content']
+        fields = ('writer', 'title', 'content')
 
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['post', 'user', 'content', 'parent']
+        fields = ('post', 'user', 'content', 'parent')
