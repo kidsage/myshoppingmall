@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # My apps
     'apps.users',
     'apps.product',
+    'apps.community',
     # Oterh apps
     'rest_framework',
     'phonenumber_field',
