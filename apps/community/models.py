@@ -2,12 +2,14 @@ from django.db import models
 
 from core.models import BaseModel
 from apps.users.models import User
+# from apps.community.utils import user_directory_path
 
-# Create your models here.
+
 class Post(BaseModel):
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     content = models.TextField(null=True)
+    image = models.ImageField(upload_to='uploads/')
 
 
 class Comment(BaseModel):
