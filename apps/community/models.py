@@ -6,10 +6,14 @@ from apps.users.models import User
 
 
 class Post(BaseModel):
+    def get_image_path(self, filename): 
+        # 'self' will work, because Django is explicitly passing it.
+        return f'{self.writer}/{filename}' 
+
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     content = models.TextField(null=True)
-    image = models.ImageField(upload_to='uploads/')
+    image = models.ImageField(upload_to=get_image_path)
 
 
 class Comment(BaseModel):
